@@ -14,8 +14,7 @@ $("document").ready(function(){
             var $mtg_card = $("div.mtg-card");
             // TAGS
             $mtg_card.append("<h3>"+ result.cards[0].name +"</h3>");
-            $mtg_card.append("<img src="+ result.cards[0].imageUrl +">")
-
+            $mtg_card.append("<img src="+ result.cards[0].imageUrl +">");
         })
 
         .fail(function(){
