@@ -1,2 +1,3 @@
-# infine-scroll-JQuery
-Example of infinite scroll using JQuery and Ajax, and Magic The Gathering API.
+# MTG-Collection
+
+Web application, developed with jQuery, Ajax, Bootstrap 4 and [MTG API](https://magicthegathering.io/) .
