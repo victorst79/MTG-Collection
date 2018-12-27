@@ -1,5 +1,6 @@
 $("document").ready(function(){
     var page = 1;
+    var main = true;
     var $cards = $("section#mtg-cards");
     var $win = $(window);
 
@@ -8,6 +9,7 @@ $("document").ready(function(){
         method: "GET",
         url: "https://api.magicthegathering.io/v1/cards?page="+ page +"&pageSize=12"
     })
+    
     .done(function(result){         
         
         for(let i = 0; i < result.cards.length; i++){
@@ -27,6 +29,7 @@ $("document").ready(function(){
     // SEARCH FUNCTION
     $("button#search").click(function(){
         var name;
+        main = false;
         if( !$("input#search").val() ){
             $("input#search").css("border-color","red");
         }else{
@@ -50,6 +53,7 @@ $("document").ready(function(){
 
     // WHITE
     $("a#white").click(function(){
+        main = false;
         $.ajax({
             method: "GET",
             url: "https://api.magicthegathering.io/v1/cards?page=1&pageSize=12&colors=white",
@@ -68,6 +72,7 @@ $("document").ready(function(){
 
     // BLUE
     $("a#blue").click(function(){
+        main = false;
         $.ajax({
             method: "GET",
             url: "https://api.magicthegathering.io/v1/cards?page=1&pageSize=12&colors=blue",
@@ -86,6 +91,7 @@ $("document").ready(function(){
 
     // RED
     $("a#red").click(function(){
+        main = false;
         $.ajax({
             method: "GET",
             url: "https://api.magicthegathering.io/v1/cards?page=1&pageSize=12&colors=red",
@@ -104,6 +110,7 @@ $("document").ready(function(){
 
     // BLACK
     $("a#black").click(function(){
+        main = false;
         $.ajax({
             method: "GET",
             url: "https://api.magicthegathering.io/v1/cards?page=1&pageSize=12&colors=black",
@@ -121,24 +128,51 @@ $("document").ready(function(){
     });
 
     // SCROLL FUNCTION
-	$win.scroll( function() {
-        if ( $(document).height() - $win.height() == $win.scrollTop()) {
-            $.ajax({
-                method: "GET",
-                url: "https://api.magicthegathering.io/v1/cards?page="+ page +"&pageSize=12",
-                success: function(result) {
+	// $win.scroll( function() {
+    //     if ( $(document).height() - $win.height() == $win.scrollTop()) {
+    //         $.ajax({
+    //             method: "GET",
+    //             url: "https://api.magicthegathering.io/v1/cards?page="+ page +"&pageSize=12",
+    //             success: function(result) {
                         
-                    for(let i = 0; i < result.cards.length; i++){
-                        $cards.append("<div class='mtg-card col-md-4'></div>");
-                        var $card = $("div.mtg-card:last-child");
-                        // TAGS
-                        $card.append("<h3>"+ result.cards[i].name +"</h3>");
-                        $card.append("<img src="+ result.cards[i].imageUrl +">");
-                    }
-                    page++;
-                }
-            });
-		}
-    });
+    //                 for(let i = 0; i < result.cards.length; i++){
+    //                     $cards.append("<div class='mtg-card col-md-4'></div>");
+    //                     var $card = $("div.mtg-card:last-child");
+    //                     // TAGS
+    //                     $card.append("<h3>"+ result.cards[i].name +"</h3>");
+    //                     $card.append("<img src="+ result.cards[i].imageUrl +">");
+    //                 }
+    //                 page++;
+    //             }
+    //         });
+	// 	}
+    // });
 
+
+    // SCROLL FUNCTION
+	$win.scroll( function() {
+        if(main == true){
+            if ( $(document).height() - $win.height() == $win.scrollTop()) {
+                $.ajax({
+                    method: "GET",
+                    url: "https://api.magicthegathering.io/v1/cards?page="+ page +"&pageSize=12",
+                    success: function(result) {
+                            
+                        for(let i = 0; i < result.cards.length; i++){
+                            $cards.append("<div class='mtg-card col-md-4'></div>");
+                            var $card = $("div.mtg-card:last-child");
+                            // TAGS
+                            $card.append("<h3>"+ result.cards[i].name +"</h3>");
+                            $card.append("<img src="+ result.cards[i].imageUrl +">");
+                        }
+                        page++;
+                    }
+                });
+            }
+        }else if(main == false){
+            // if(){
+
+            // }
+        }    
+    }); 
 });
