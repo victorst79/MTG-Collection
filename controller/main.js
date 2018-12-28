@@ -1,6 +1,7 @@
 $("document").ready(function(){
     var page = 1;
     var main = true;
+    var contex;
     var $cards = $("section#mtg-cards");
     var $win = $(window);
 
@@ -54,6 +55,7 @@ $("document").ready(function(){
     // WHITE
     $("a#white").click(function(){
         main = false;
+        contex = "white";
         $.ajax({
             method: "GET",
             url: "https://api.magicthegathering.io/v1/cards?page=1&pageSize=12&colors=white",
@@ -73,6 +75,7 @@ $("document").ready(function(){
     // BLUE
     $("a#blue").click(function(){
         main = false;
+        contex = "blue";
         $.ajax({
             method: "GET",
             url: "https://api.magicthegathering.io/v1/cards?page=1&pageSize=12&colors=blue",
@@ -92,6 +95,7 @@ $("document").ready(function(){
     // RED
     $("a#red").click(function(){
         main = false;
+        contex = "red";
         $.ajax({
             method: "GET",
             url: "https://api.magicthegathering.io/v1/cards?page=1&pageSize=12&colors=red",
@@ -111,6 +115,7 @@ $("document").ready(function(){
     // BLACK
     $("a#black").click(function(){
         main = false;
+        contex = "black";
         $.ajax({
             method: "GET",
             url: "https://api.magicthegathering.io/v1/cards?page=1&pageSize=12&colors=black",
@@ -170,8 +175,38 @@ $("document").ready(function(){
                 });
             }
         }else if(main == false){
-            // if(){
-
+            // if(contex == "white"){
+            //     $.ajax({
+            //         method: "GET",
+            //         url: "https://api.magicthegathering.io/v1/cards?page="+ page +"&pageSize=12&colors=white",
+            //         success: function(result) {
+                            
+            //             for(let i = 0; i < result.cards.length; i++){
+            //                 $cards.append("<div class='mtg-card col-md-4'></div>");
+            //                 var $card = $("div.mtg-card:last-child");
+            //                 // TAGS
+            //                 $card.append("<h3>"+ result.cards[i].name +"</h3>");
+            //                 $card.append("<img src="+ result.cards[i].imageUrl +">");
+            //             }
+            //             page++;
+            //         }
+            //     });
+            // }else if(contex == "blue"){
+            //     $.ajax({
+            //         method: "GET",
+            //         url: "https://api.magicthegathering.io/v1/cards?page="+ page +"&pageSize=12&colors=blue",
+            //         success: function(result) {
+                            
+            //             for(let i = 0; i < result.cards.length; i++){
+            //                 $cards.append("<div class='mtg-card col-md-4'></div>");
+            //                 var $card = $("div.mtg-card:last-child");
+            //                 // TAGS
+            //                 $card.append("<h3>"+ result.cards[i].name +"</h3>");
+            //                 $card.append("<img src="+ result.cards[i].imageUrl +">");
+            //             }
+            //             page++;
+            //         }
+            //     });
             // }
         }    
     }); 
