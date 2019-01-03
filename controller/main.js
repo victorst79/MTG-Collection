@@ -175,6 +175,7 @@ $("document").ready(function(){
                 });
             }
         }else if(main == false){
+            // TEST SCROLL SECTION
             // if(contex == "white"){
             //     $.ajax({
             //         method: "GET",
