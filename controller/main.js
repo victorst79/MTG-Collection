@@ -11,14 +11,26 @@ $("document").ready(function(){
         url: "https://api.magicthegathering.io/v1/cards?page="+ page +"&pageSize=12"
     })
     
-    .done(function(result){         
-        
+    .done(function(result){
         for(let i = 0; i < result.cards.length; i++){
             $cards.append("<div class='mtg-card col-md-4'></div>");
             var $card = $("div.mtg-card:last-child");
+            $card.append("<h3>TEST</h3>");
+            $card.click(function(){
+                console.log(result.cards[i].name);
+                console.log(this);
+
+            });
+
             // TAGS
             $card.append("<h3>"+ result.cards[i].name +"</h3>");
-            $card.append("<img src="+ result.cards[i].imageUrl +">");
+            if(result.cards[i].imageUrl == undefined){
+                $card.append("<img src='./resources/mtg-back.png'>");
+            }else{
+                $card.append("<img src="+ result.cards[i].imageUrl +">");
+            }
+
+            
         }
         page++;
     })
@@ -45,7 +57,11 @@ $("document").ready(function(){
                         var $card = $("div.mtg-card:last-child");
                         // TAGS
                         $card.append("<h3>"+ result.cards[i].name +"</h3>");
-                        $card.append("<img src="+ result.cards[i].imageUrl +">");
+                        if(result.cards[i].imageUrl == undefined){
+                            $card.append("<img src='./resources/mtg-back.png'>");
+                        }else{
+                            $card.append("<img src="+ result.cards[i].imageUrl +">");
+                        }
                     }
                 }
             });
@@ -66,7 +82,11 @@ $("document").ready(function(){
                     var $card = $("div.mtg-card:last-child");
                     // TAGS
                     $card.append("<h3>"+ result.cards[i].name +"</h3>");
-                    $card.append("<img src="+ result.cards[i].imageUrl +">");
+                    if(result.cards[i].imageUrl == undefined){
+                        $card.append("<img src='./resources/mtg-back.png'>");
+                    }else{
+                        $card.append("<img src="+ result.cards[i].imageUrl +">");
+                    }
                 }
             }
         });
@@ -86,7 +106,11 @@ $("document").ready(function(){
                     var $card = $("div.mtg-card:last-child");
                     // TAGS
                     $card.append("<h3>"+ result.cards[i].name +"</h3>");
-                    $card.append("<img src="+ result.cards[i].imageUrl +">");
+                    if(result.cards[i].imageUrl == undefined){
+                        $card.append("<img src='./resources/mtg-back.png'>");
+                    }else{
+                        $card.append("<img src="+ result.cards[i].imageUrl +">");
+                    }
                 }
             }
         });
@@ -106,7 +130,11 @@ $("document").ready(function(){
                     var $card = $("div.mtg-card:last-child");
                     // TAGS
                     $card.append("<h3>"+ result.cards[i].name +"</h3>");
-                    $card.append("<img src="+ result.cards[i].imageUrl +">");
+                    if(result.cards[i].imageUrl == undefined){
+                        $card.append("<img src='./resources/mtg-back.png'>");
+                    }else{
+                        $card.append("<img src="+ result.cards[i].imageUrl +">");
+                    }
                 }
             }
         });
@@ -126,7 +154,11 @@ $("document").ready(function(){
                     var $card = $("div.mtg-card:last-child");
                     // TAGS
                     $card.append("<h3>"+ result.cards[i].name +"</h3>");
-                    $card.append("<img src="+ result.cards[i].imageUrl +">");
+                    if(result.cards[i].imageUrl == undefined){
+                        $card.append("<img src='./resources/mtg-back.png'>");
+                    }else{
+                        $card.append("<img src="+ result.cards[i].imageUrl +">");
+                    }
                 }
             }
         });
@@ -168,7 +200,11 @@ $("document").ready(function(){
                             var $card = $("div.mtg-card:last-child");
                             // TAGS
                             $card.append("<h3>"+ result.cards[i].name +"</h3>");
-                            $card.append("<img src="+ result.cards[i].imageUrl +">");
+                            if(result.cards[i].imageUrl == undefined){
+                                $card.append("<img src='https://vignette.wikia.nocookie.net/magic-thegathering/images/c/c8/Magic_Card_Back.png/revision/latest?cb=20130416121221'>");
+                            }else{
+                                $card.append("<img src="+ result.cards[i].imageUrl +">");
+                            }
                         }
                         page++;
                     }

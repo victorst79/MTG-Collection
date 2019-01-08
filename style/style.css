@@ -33,3 +33,7 @@ h3::after{
     height: 60px;
     margin: 0 25px;
 }
+
+.mtg-card-details{
+    background-color:grey;
+}
