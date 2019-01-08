@@ -1,9 +1,10 @@
-$("document").ready(function(){
+$(document).ready(function(){
     var page = 1;
     var main = true;
     var contex;
     var $cards = $("section#mtg-cards");
     var $win = $(window);
+    var petitionOn = false;
 
     // INITIAL PETITION
     $.ajax({
@@ -157,23 +158,29 @@ $("document").ready(function(){
     // SCROLL FUNCTION
 	$win.scroll( function() {
         if(main == true){
-            if ( $(document).height() - $win.height() == $win.scrollTop()) {
-                console.log("Scroll Working");
-                $.ajax({
-                    method: "GET",
-                    url: "https://api.magicthegathering.io/v1/cards?page="+ page +"&pageSize=12",
-                    success: function(result) {
-                            
-                        for(let i = 0; i < result.cards.length; i++){
-                            $cards.append("<div class='mtg-card col-md-4'></div>");
-                            var $card = $("div.mtg-card:last-child");
-                            // TAGS
-                            $card.append("<h3>"+ result.cards[i].name +"</h3>");
-                            $card.append("<img src="+ result.cards[i].imageUrl +">");
+            if ( $(document).height() - $win.height() <= ($win.scrollTop()+10)) {
+                if (!petitionOn){
+                    petitionOn = true;
+                    $.ajax({
+                        method: "GET",
+                        url: "https://api.magicthegathering.io/v1/cards?page="+ page +"&pageSize=12",
+                        success: function(result) {
+                                
+                            for(let i = 0; i < result.cards.length; i++){
+                                $cards.append("<div class='mtg-card col-md-4'></div>");
+                                var $card = $("div.mtg-card:last-child");
+                                // TAGS
+                                $card.append("<h3>"+ result.cards[i].name +"</h3>");
+                                $card.append("<img src="+ result.cards[i].imageUrl +">");
+                            }
+                            page++;
+                            petitionOn=false;
+                        },
+                        error: function(){
+                            console.log("FAIL SCROLL");
                         }
-                        page++;
-                    }
-                });
+                    });
+                }
             }
         }else if(main == false){
             // TEST SCROLL SECTION
@@ -210,6 +217,6 @@ $("document").ready(function(){
             //         }
             //     });
             // }
-        }    
+        }
     });
 });
