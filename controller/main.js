@@ -20,6 +20,7 @@ $(document).ready(function(){
             // TAGS
             $card.append("<h3>"+ result.cards[i].name +"</h3>");
             $card.append("<img src="+ result.cards[i].imageUrl +">");
+            // DETAIL FUNCTION
         }
         page++;
     })
