@@ -4,6 +4,7 @@ $("document").ready(function(){
     var contex;
     var $cards = $("section#mtg-cards");
     var $win = $(window);
+    var petitionOn = false;
 
     // INITIAL PETITION
     $.ajax({
@@ -189,26 +190,33 @@ $("document").ready(function(){
     // SCROLL FUNCTION
 	$win.scroll( function() {
         if(main == true){
-            if ( $(document).height() - $win.height() == $win.scrollTop()) {
-                $.ajax({
-                    method: "GET",
-                    url: "https://api.magicthegathering.io/v1/cards?page="+ page +"&pageSize=12",
-                    success: function(result) {
-                            
-                        for(let i = 0; i < result.cards.length; i++){
-                            $cards.append("<div class='mtg-card col-md-4'></div>");
-                            var $card = $("div.mtg-card:last-child");
-                            // TAGS
-                            $card.append("<h3>"+ result.cards[i].name +"</h3>");
-                            if(result.cards[i].imageUrl == undefined){
-                                $card.append("<img src='https://vignette.wikia.nocookie.net/magic-thegathering/images/c/c8/Magic_Card_Back.png/revision/latest?cb=20130416121221'>");
-                            }else{
-                                $card.append("<img src="+ result.cards[i].imageUrl +">");
+            if ( $(document).height() - $win.height() <= ($win.scrollTop()+10)) {
+                if (!petitionOn){
+                    petitionOn = true;
+                    $.ajax({
+                        method: "GET",
+                        url: "https://api.magicthegathering.io/v1/cards?page="+ page +"&pageSize=12",
+                        success: function(result) {
+                                
+                            for(let i = 0; i < result.cards.length; i++){
+                                $cards.append("<div class='mtg-card col-md-4'></div>");
+                                var $card = $("div.mtg-card:last-child");
+                                // TAGS
+                                $card.append("<h3>"+ result.cards[i].name +"</h3>");
+                                if(result.cards[i].imageUrl == undefined){
+                                    $card.append("<img src='./resources/mtg-back.png'>");
+                                }else{
+                                    $card.append("<img src="+ result.cards[i].imageUrl +">");
+                                }
                             }
+                            page++;
+                            petitionOn=false;
+                        },
+                        error: function(){
+                            console.log("FAIL SCROLL");
                         }
-                        page++;
-                    }
-                });
+                    });
+                }
             }
         }else if(main == false){
             // if(contex == "white"){
