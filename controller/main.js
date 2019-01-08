@@ -132,7 +132,7 @@ $("document").ready(function(){
         });
     });
 
-    // SCROLL FUNCTION
+    //SCROLL FUNCTION
 	// $win.scroll( function() {
     //     if ( $(document).height() - $win.height() == $win.scrollTop()) {
     //         $.ajax({
@@ -158,6 +158,7 @@ $("document").ready(function(){
 	$win.scroll( function() {
         if(main == true){
             if ( $(document).height() - $win.height() == $win.scrollTop()) {
+                console.log("Scroll Working");
                 $.ajax({
                     method: "GET",
                     url: "https://api.magicthegathering.io/v1/cards?page="+ page +"&pageSize=12",
