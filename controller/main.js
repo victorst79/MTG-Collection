@@ -164,6 +164,30 @@ $("document").ready(function(){
         });
     });
 
+    // GREEN
+    $("a#green").click(function(){
+        main = false;
+        contex = "green";
+        $.ajax({
+            method: "GET",
+            url: "https://api.magicthegathering.io/v1/cards?page=1&pageSize=12&colors=green",
+            success: function(result){
+                $(".mtg-card").hide();
+                for(let i = 0; i < result.cards.length; i++){
+                    $cards.append("<div class='mtg-card col-md-4'></div>");
+                    var $card = $("div.mtg-card:last-child");
+                    // TAGS
+                    $card.append("<h3>"+ result.cards[i].name +"</h3>");
+                    if(result.cards[i].imageUrl == undefined){
+                        $card.append("<img src='./resources/mtg-back.png'>");
+                    }else{
+                        $card.append("<img src="+ result.cards[i].imageUrl +">");
+                    }
+                }
+            }
+        });
+    });
+
     // SCROLL FUNCTION
 	// $win.scroll( function() {
     //     if ( $(document).height() - $win.height() == $win.scrollTop()) {
