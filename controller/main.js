@@ -16,7 +16,6 @@ $("document").ready(function(){
         for(let i = 0; i < result.cards.length; i++){
             $cards.append("<div class='mtg-card col-md-4'></div>");
             var $card = $("div.mtg-card:last-child");
-            $card.append("<h3>TEST</h3>");
             $card.click(function(){
                 console.log(result.cards[i].name);
                 console.log(this);
