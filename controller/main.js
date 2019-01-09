@@ -37,7 +37,7 @@ $("document").ready(function(){
                 })
                 .done(function(result){
                     console.log(result);
-                    $("<div class='mtg-card-details'><h3>"+result.cards[0].name+"</h3><img src="+ result.cards[0].imageUrl +"><p>"+result.cards[0].originalText+"</p></div>").dialog();
+                    $("<div class='container'><div class='row'><div class='mtg-card-details col-md-12'><h3>"+result.cards[0].name+"</h3><img src="+ result.cards[0].imageUrl +"><p>"+result.cards[0].originalText+"</p><p>"+result.cards[0].manaCost+"</p><p>"+result.cards[0].type+"</p></div></div></div></div>").dialog();
                 })
             });
             
@@ -237,6 +237,10 @@ $("document").ready(function(){
                             for(let i = 0; i < result.cards.length; i++){
                                 $cards.append("<div class='mtg-card col-md-4'></div>");
                                 var $card = $("div.mtg-card:last-child");
+
+                                var $details = $("<spam>"+result.cards[i].multiverseid+"</spam>").hide();
+                                $card.append($details);
+
                                 // TAGS
                                 $card.append("<h3>"+ result.cards[i].name +"</h3>");
                                 if(result.cards[i].imageUrl == undefined){
@@ -244,6 +248,19 @@ $("document").ready(function(){
                                 }else{
                                     $card.append("<img src="+ result.cards[i].imageUrl +">");
                                 }
+
+                                $card.click(function detail(){
+                                    var id = this.childNodes[0].innerHTML;
+                                    console.log(id);
+                                    $.ajax({
+                                        method: "GET",
+                                        url: "https://api.magicthegathering.io/v1/cards?multiverseid="+ id
+                                    })
+                                    .done(function(result){
+                                        console.log(result);
+                                        $("<div class='container'><div class='row'><div class='mtg-card-details col-md-12'><h3>"+result.cards[0].name+"</h3><img src="+ result.cards[0].imageUrl +"><p>"+result.cards[0].originalText+"</p><p>"+result.cards[0].manaCost+"</p><p>"+result.cards[0].type+"</p></div></div></div></div>").dialog();
+                                    })
+                                });
                             }
                             page++;
                             petitionOn=false;
