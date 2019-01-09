@@ -16,12 +16,10 @@ $("document").ready(function(){
         for(let i = 0; i < result.cards.length; i++){
             $cards.append("<div class='mtg-card col-md-4'></div>");
             var $card = $("div.mtg-card:last-child");
-            $card.click(function(){
-                console.log(result.cards[i].name);
-                console.log(this);
 
-            });
-
+            var $details = $("<spam>"+result.cards[i].multiverseid+"</spam>").hide();
+            $card.append($details);
+            
             // TAGS
             $card.append("<h3>"+ result.cards[i].name +"</h3>");
             if(result.cards[i].imageUrl == undefined){
@@ -30,6 +28,18 @@ $("document").ready(function(){
                 $card.append("<img src="+ result.cards[i].imageUrl +">");
             }
 
+            $card.click(function detail(){
+                var id = this.childNodes[0].innerHTML;
+                console.log(id);
+                $.ajax({
+                    method: "GET",
+                    url: "https://api.magicthegathering.io/v1/cards?multiverseid="+ id
+                })
+                .done(function(result){
+                    console.log(result);
+                    $("<div class='mtg-card-details'><h3>"+result.cards[0].name+"</h3><img src="+ result.cards[0].imageUrl +"><p>"+result.cards[0].originalText+"</p></div>").dialog();
+                })
+            });
             
         }
         page++;
@@ -39,6 +49,9 @@ $("document").ready(function(){
         console.error("API NOT WORKING");
     });
     
+    // DETAILS FUNCTION
+    
+
     // SEARCH FUNCTION
     $("button#search").click(function(){
         var name;
