@@ -34,6 +34,21 @@ h3::after{
     margin: 0 25px;
 }
 
-div.ui-dialog-titlebar{
-    background-color: #1a1a1a !important;
+.ui-dialog{
+    text-align: center;
+    width: 500px !important;
 }
+
+div.ui-widget-header{
+    background: #1a1a1a !important;
+}
+
+div.mtg-card-details h4{
+    font-family: Beleren-Bold;
+    font-size: 1rem;
+}
+
+div.ui-dialog div.ui-dialog-titlebar-close{
+    background: red !important;
+}
+
