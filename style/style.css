@@ -8,6 +8,10 @@
     padding: 0px;
 }
 
+body{
+    background-color: rgba(204, 204, 204, 0.479) !important;
+}
+
 h3{
     font-family: Beleren-Bold;
 }
