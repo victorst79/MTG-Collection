@@ -37,7 +37,7 @@ $("document").ready(function(){
                 })
                 .done(function(result){
                     console.log(result);
-                    $("<div class='container'><div class='row'><div class='mtg-card-details col-md-12'><h3>"+result.cards[0].name+"</h3><img src="+ result.cards[0].imageUrl +"><p>"+result.cards[0].originalText+"</p><p>"+result.cards[0].manaCost+"</p><p>"+result.cards[0].type+"</p></div></div></div></div>").dialog();
+                    $("<div class='container'><div class='row'><div class='mtg-card-details col-md-12'><h3>"+result.cards[0].name+"</h3><img src="+ result.cards[0].imageUrl +"><h4>Description</h4><p>"+result.cards[0].originalText+"</p><h4>Mana Cost</h4><p>"+result.cards[0].manaCost+"</p><h4>Type</h4><p>"+result.cards[0].type+"</p></div></div></div></div>").dialog();
                 })
             });
             
